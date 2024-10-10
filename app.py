@@ -1,6 +1,18 @@
+"""
+Este archivo contiene una aplicación básica de Flask.
+"""
+
 from flask import Flask
+
 app = Flask(__name__)
 
-@app.route("/")
+"""
+Este archivo contiene una aplicación básica de Flask.
+"""
+
+@app.route('/')
 def home():
-    return "Hello world, from Flask!"
+    """
+    Esta función maneja la ruta raíz y devuelve un saludo.
+    """
+    return "¡Hola, Flask!"
