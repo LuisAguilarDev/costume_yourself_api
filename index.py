@@ -1,0 +1,12 @@
+from config import configurations  # Importa el diccionario correcto
+
+from src import init_app
+
+# Accede a la configuración de desarrollo
+Configuration = configurations['development']
+
+# Inicializa la aplicación con la configuración seleccionada
+app = init_app(Configuration)
+
+if __name__ == '__main__':
+    app.run()
