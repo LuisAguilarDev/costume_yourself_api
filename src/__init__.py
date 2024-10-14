@@ -1,10 +1,10 @@
 from flask import Flask
-
+from flask_cors import CORS
 # Routes
 from src.routes import index_routes,other_routes
 
 app = Flask(__name__)
-
+CORS(app)
 
 def init_app(config):
     # Configuration

@@ -2,14 +2,13 @@ from decouple import config
 
 
 class Settings:
-    SECRET_KEY = config('SECRET_KEY')
-
-
+    CLOUD_NAME_CLOUDINARY:str = config('CLOUD_NAME_CLOUDINARY')
+    API_KEY_CLOUDINARY:str = config('API_KEY_CLOUDINARY')
+    API_SECRET_CLOUDINARY:str = config('API_SECRET_CLOUDINARY')
+    CLOUDINARY_URL:str = config('CLOUDINARY_URL')
 class DevelopmentConfig(Settings):
     DEBUG = True
 
-
-# Renombrar el diccionario para evitar conflicto
 configurations = {
     'development': DevelopmentConfig
 }
