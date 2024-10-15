@@ -94,6 +94,8 @@ def get_image_file(url):
         return None
     
 def get_image_file_base64(image_file):
+        if image_file is None:
+            raise ValueError("No image file provided")
         encoded_image = base64.b64encode(image_file.getvalue()).decode('utf-8')
         return encoded_image
 
