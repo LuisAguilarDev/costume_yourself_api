@@ -1,6 +1,11 @@
 from flask import Blueprint, request, jsonify
-main = Blueprint('index_blueprint', __name__)
 from services.cloudinary_service import transform
+
+main = Blueprint('index_blueprint', __name__)
+
+@main.route('/hi', methods=['GET'])
+def say_hello():
+    return "Hello World"
 
 @main.route('/upload', methods=['Post'])
 def index():
@@ -14,3 +19,5 @@ def index():
     costume=request.form['costume']
     response=transform(file=file,costume=costume)
     return jsonify({"response":response})
+
+
