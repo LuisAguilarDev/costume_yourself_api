@@ -109,18 +109,12 @@ def transform(file:FileStorage,costume:str):
     BG=f"{theme} setting Maintain the central elements of the original photo put lighting and surrounding details to match the {theme} Incorporate specific elements or objects that are iconic for this theme Ensure that the colors mood and textures reflect the {theme} atmosphere while keeping the photo main focus intact"
 
     fixed_url_bg=encode_spaces(BG)
-
-    new_url_bg = f"https://res.cloudinary.com/desdbp97s/image/upload/e_gen_background_replace:prompt_an_{fixed_url_bg}/{match.group(1)}.jpg"
-    
-    file2=get_image_file(new_url_bg)
+    bgreplace = f"e_gen_background_replace:prompt_an_{fixed_url_bg}"
 
     "Replace Clothes"
-    
-    response_upload=cloudinary.uploader.upload(file2)
-    match = re.search(r'/upload/[^/]+/([^\.]+)\.', response_upload["secure_url"])
-
     clothes= dictBackDescription[costume]
     encoded_url=encode_spaces(clothes)
-    new_url_clothes = f"https://res.cloudinary.com/desdbp97s/image/upload/e_gen_replace:from_all_clothes;to_{encoded_url}/{match.group(1)}.jpg"
-    file3=get_image_file(new_url_clothes)
+    clothes_replace=f"e_gen_replace:from_all_clothes;to_{encoded_url}"
+    new_url_full_transform_url = f"https://res.cloudinary.com/desdbp97s/image/upload/{clothes_replace}/{bgreplace}/{match.group(1)}.jpg"
+    file3=get_image_file(new_url_full_transform_url)
     return get_image_file_base64(file3)
