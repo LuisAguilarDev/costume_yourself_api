@@ -17,7 +17,7 @@ cloudinary.config(cloud_name = Settings.CLOUD_NAME_CLOUDINARY,
 
 
 def encode_spaces(url):
-    return url.replace(' ', '%20').replace('.','').replace(',','')
+    return url.replace(' ', '_').replace('.','').replace(',','')
 
 dictBackDescription = {
     "Pirate": "Creative Pirate costume hat sword",
