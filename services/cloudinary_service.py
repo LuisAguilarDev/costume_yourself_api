@@ -49,7 +49,7 @@ dictBackDescription = {
     "Robot": "Creative Robot Metallic grey kind of exoskeleton, boxy shapes, and LED lights",
     "Vampire Queen": "Creative Vampire Cape, fangs, and dark clothing",
     "Mummy King": "Creative Mummy Male Bandages wrapped around the body, ancient Egyptian look",
-    "Mummy queen": "Creative Mummy Female Bandages wrapped around the body, ancient Egyptian look"
+    "Mummy Queen": "Creative Mummy Female Bandages wrapped around the body, ancient Egyptian look"
   }
 dictBackTheme = {
     "Pirate": "Pirate Era the Golden Age of Piracy",
@@ -57,6 +57,7 @@ dictBackTheme = {
     "Cowboy": "Wild West",
     "Superhero": "Modern Heroic Era",
     "Vampire king": "Victorian Gothic",
+    "Vampire Queen": "Victorian Gothic",
     "Gladiator": "Ancient Rome",
     "Zombie": "Post-Apocalyptic",
     "Samurai": "Feudal Japan",
@@ -80,7 +81,7 @@ dictBackTheme = {
     "Astronaut": "Space",
     "Robot": "Futuristic Era",
     "Mummy King": "Ancient Egypt",
-    "Mummy queen": "Ancient Egypt"
+    "Mummy Queen": "Ancient Egypt"
 }
 
 def get_image_file(url):
