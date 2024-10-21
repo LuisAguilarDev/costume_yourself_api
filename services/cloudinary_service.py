@@ -109,7 +109,7 @@ def transform(file:FileStorage,costume:str):
     #Replace BackGround
     theme=dictBackTheme[costume]
 
-    BG=f"{theme} setting Maintain the central elements of the original photo put lighting and surrounding details to match the {theme} Incorporate specific elements or objects that are iconic for this theme Ensure that the colors mood and textures reflect the {theme} atmosphere while keeping the photo main focus intact"
+    BG=f"{theme}_setting_Maintain_the_central_elements_of_the_original_photo_put_lighting_and_surrounding_details_to_match_the_{theme}_Incorporate_specific_elements_or_objects_that_are_iconic_for_this_theme_Ensure_that_the_colors_mood_and_textures_reflect_the_{theme}_atmosphere_while_keeping_the_photo_main_focus_intact"
 
     fixed_url_bg=encode_spaces(BG)
     bgreplace = f"e_gen_background_replace:prompt_an_{fixed_url_bg}"
@@ -119,5 +119,6 @@ def transform(file:FileStorage,costume:str):
     encoded_url=encode_spaces(clothes)
     clothes_replace=f"e_gen_replace:from_all_clothes;to_{encoded_url}"
     new_url_full_transform_url = f"https://res.cloudinary.com/desdbp97s/image/upload/{clothes_replace}/{bgreplace}/{match.group(1)}.jpg"
+    print("url",new_url_full_transform_url)
     file3=get_image_file(new_url_full_transform_url)
     return get_image_file_base64(file3)
