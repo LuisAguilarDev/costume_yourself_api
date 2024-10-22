@@ -87,17 +87,27 @@ dictBackTheme = {
     "Mummy Queen": "Ancient Egypt"
 }
 
-async def get_image_file(url):
-    timeout = aiohttp.ClientTimeout(total=6000)
-    async with aiohttp.ClientSession(timeout=timeout) as session:
-        async with session.get(url) as response:
-            if response.status == 200:
-                image_content = await response.read()
-                image_file = BytesIO(image_content)
-                return image_file
-            else:
-                print(f"Failed to retrieve image. Status code: {response.status}")
-                return None
+def get_image_file(url):
+    response = requests.get(url)
+    print(response,url)
+    if response.status_code == 200:
+        image_file = BytesIO(response.content)
+        return image_file
+    else:
+        print(f"Failed to retrieve image. Status code: {response.status_code}")
+        return None
+            
+# async def get_image_file(url):
+#     timeout = aiohttp.ClientTimeout(total=6000)
+#     async with aiohttp.ClientSession(timeout=timeout) as session:
+#         async with session.get(url) as response:
+#             if response.status == 200:
+#                 image_content = await response.read()
+#                 image_file = BytesIO(image_content)
+#                 return image_file
+#             else:
+#                 print(f"Failed to retrieve image. Status code: {response.status}")
+#                 return None
     
 def get_image_file_base64(image_file):
         if image_file is None:
@@ -126,6 +136,6 @@ def transform(file:FileStorage,costume:str):
     new_url_full_transform_url = f"https://res.cloudinary.com/desdbp97s/image/upload/{clothes_replace}/{bgreplace}/{match.group(1)}.jpg"
     print("url",new_url_full_transform_url)
     logging.basicConfig(level=logging.INFO)
-    logging.info("Message to console",new_url_full_transform_url)
+    logging.info(new_url_full_transform_url)
     file3=asyncio.run(get_image_file(new_url_full_transform_url))
     return get_image_file_base64(file3)
