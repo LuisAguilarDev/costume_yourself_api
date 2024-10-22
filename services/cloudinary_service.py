@@ -9,6 +9,7 @@ from io import BytesIO
 import base64
 import requests
 from io import BytesIO
+import logging
 
 cloudinary.config(cloud_name = Settings.CLOUD_NAME_CLOUDINARY,
                   api_key = Settings.API_KEY_CLOUDINARY,
@@ -120,5 +121,7 @@ def transform(file:FileStorage,costume:str):
     clothes_replace=f"e_gen_replace:from_all_clothes;to_{encoded_url}"
     new_url_full_transform_url = f"https://res.cloudinary.com/desdbp97s/image/upload/{clothes_replace}/{bgreplace}/{match.group(1)}.jpg"
     print("url",new_url_full_transform_url)
+    logging.basicConfig(level=logging.INFO)
+    logging.info("Message to console",new_url_full_transform_url)
     file3=get_image_file(new_url_full_transform_url)
     return get_image_file_base64(file3)
