@@ -7,7 +7,6 @@ Configuration = configurations['development']
 
 # Inicializa la aplicación con la configuración seleccionada
 app = init_app(Configuration)
-CORS(app) 
 
 if __name__ == '__main__':
     app.run()
