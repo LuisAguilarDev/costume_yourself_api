@@ -95,7 +95,7 @@ async def get_image_file(url):
                 image_file = BytesIO(image_content)
                 return image_file
             else:
-                print(f"Failed to retrieve image. Status code: {response.status_code}")
+                print(f"Failed to retrieve image. Status code: {response.status}")
                 return None
     
 def get_image_file_base64(image_file):
