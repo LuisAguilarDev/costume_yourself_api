@@ -10,6 +10,8 @@ import base64
 import requests
 from io import BytesIO
 import logging
+import aiohttp
+import asyncio
 
 cloudinary.config(cloud_name = Settings.CLOUD_NAME_CLOUDINARY,
                   api_key = Settings.API_KEY_CLOUDINARY,
@@ -85,15 +87,16 @@ dictBackTheme = {
     "Mummy Queen": "Ancient Egypt"
 }
 
-def get_image_file(url):
-    response = requests.get(url)
-    print(response,url)
-    if response.status_code == 200:
-        image_file = BytesIO(response.content)
-        return image_file
-    else:
-        print(f"Failed to retrieve image. Status code: {response.status_code}")
-        return None
+async def get_image_file(url):
+    async with aiohttp.ClientSession() as session:
+        async with session.get(url) as response:
+            if response.status == 200:
+                image_content = await response.read()
+                image_file = BytesIO(image_content)
+                return image_file
+            else:
+                print(f"Failed to retrieve image. Status code: {response.status_code}")
+                return None
     
 def get_image_file_base64(image_file):
         if image_file is None:
@@ -123,5 +126,5 @@ def transform(file:FileStorage,costume:str):
     print("url",new_url_full_transform_url)
     logging.basicConfig(level=logging.INFO)
     logging.info("Message to console",new_url_full_transform_url)
-    file3=get_image_file(new_url_full_transform_url)
+    file3=asyncio.run(get_image_file(new_url_full_transform_url))
     return get_image_file_base64(file3)
