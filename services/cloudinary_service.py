@@ -88,7 +88,8 @@ dictBackTheme = {
 }
 
 async def get_image_file(url):
-    async with aiohttp.ClientSession() as session:
+    timeout = aiohttp.ClientTimeout(total=6000)
+    async with aiohttp.ClientSession(timeout=timeout) as session:
         async with session.get(url) as response:
             if response.status == 200:
                 image_content = await response.read()
