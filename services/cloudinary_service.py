@@ -96,7 +96,13 @@ def get_image_file(url):
     else:
         print(f"Failed to retrieve image. Status code: {response.status_code}")
         return None
-            
+async def fire_and_forget_get(url):
+    async with aiohttp.ClientSession() as session:
+        async with session.get(url) as response:
+            # We don't await or process the response
+            print(f"Fire-and-forget request to {url} sent.")
+            # This will not wait for the response or process it
+  
 # async def get_image_file(url):
 #     timeout = aiohttp.ClientTimeout(total=6000)
 #     async with aiohttp.ClientSession(timeout=timeout) as session:
@@ -138,5 +144,6 @@ def transform(file:FileStorage,costume:str):
     logging.basicConfig(level=logging.INFO)
     logging.info(new_url_full_transform_url)
     # file3=asyncio.run(get_image_file(new_url_full_transform_url))
+    asyncio.create_task(fire_and_forget_get(new_url_full_transform_url))
     file3=get_image_file(new_url_full_transform_url)
     return get_image_file_base64(file3)
