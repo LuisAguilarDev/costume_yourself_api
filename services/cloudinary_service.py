@@ -137,5 +137,6 @@ def transform(file:FileStorage,costume:str):
     print("url",new_url_full_transform_url)
     logging.basicConfig(level=logging.INFO)
     logging.info(new_url_full_transform_url)
-    file3=asyncio.run(get_image_file(new_url_full_transform_url))
+    # file3=asyncio.run(get_image_file(new_url_full_transform_url))
+    file3=get_image_file(new_url_full_transform_url)
     return get_image_file_base64(file3)
