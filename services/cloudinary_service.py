@@ -27,14 +27,14 @@ dictBackDescription = {
     "Knight": "Creative Knight costume Armor, shield, and sword",
     "Cowboy": "Creative Cowboy hat, boots, and bandana",
     "Superhero": "Creative Superhero Cape, mask, and emblem like Superman or Batman",
-    "Vampire king": "Creative high-collared, black satin vest with silver buttons and elegant brocade patterns. Underneath, a flowing white silk shirt with ruffled sleeves, adding a timeless and aristocratic vibe. His black leather pants are sleek, fitting tightly to emphasize his agility and power.",
+    "Vampire king": "A_high_collared black satin vest with silver buttons and brocade patterns, paired with a white silk shirt with ruffled sleeves and sleek black leather pants_creating an elegant and powerful look",
     "Gladiator": "Creative Armor, sandals, and a sword",
     "Zombie": "Creative Zombie dirty and torn clothes rusted",
     "Samurai": "Creative Kimono, sword, and samurai helmet",
     "Werewolf": "Creative Fur, claws, and wolf mask",
     "Wizard": "Creative Robe, wand, and pointed hat like Merlin or Harry Potter",
     "Witch": "Creative Pointed hat, broomstick, and dark dress",
-    "Fairy": "Creative Wings, tiara, and a wand",
+    "Fairy": "creative_fairy_costume_wings_tiara_and_wand",
     "Princess": " Creative Gown, tiara, and jewelry like Cinderella",
     "Mermaid": "Creative Tail, seashells, and flowing hair",
     "Catwoman": "Creative Black bodysuit, cat ears, and mask",
@@ -124,13 +124,13 @@ def get_image_file_base64(image_file):
 def transform(file:FileStorage,costume:str):
     #Upload base img
     response=cloudinary.uploader.upload(file)
-
     match = re.search(r'/upload/[^/]+/([^\.]+)\.', response["secure_url"])
+
 
     #Replace BackGround
     theme=dictBackTheme[costume]
 
-    BG=f"{theme}_setting_Maintain_the_central_elements_of_the_original_photo_put_lighting_and_surrounding_details_to_match_the_{theme}_Incorporate_specific_elements_or_objects_that_are_iconic_for_this_theme_Ensure_that_the_colors_mood_and_textures_reflect_the_{theme}_atmosphere_while_keeping_the_photo_main_focus_intact"
+    BG=f"{theme}_put_lighting_and_surrounding_details_to_match_the_{theme}_Incorporate_specific_elements_or_objects_that_are_iconic_for_this_{theme}_Ensure_that_the_colors_mood_and_textures_reflect_the_{theme}_atmosphere"
 
     fixed_url_bg=encode_spaces(BG)
     bgreplace = f"e_gen_background_replace:prompt_an_{fixed_url_bg}"
@@ -139,11 +139,9 @@ def transform(file:FileStorage,costume:str):
     clothes= dictBackDescription[costume]
     encoded_url=encode_spaces(clothes)
     clothes_replace=f"e_gen_replace:from_all_clothes;to_{encoded_url}"
-    new_url_full_transform_url = f"https://res.cloudinary.com/desdbp97s/image/upload/{clothes_replace}/{bgreplace}/{match.group(1)}.jpg"
+    new_url_full_transform_url = f"https://res.cloudinary.com/desdbp97s/image/upload/{bgreplace}/{clothes_replace}/{match.group(1)}.jpg"
     print("url",new_url_full_transform_url)
     logging.basicConfig(level=logging.INFO)
     logging.info(new_url_full_transform_url)
-    # file3=asyncio.run(get_image_file(new_url_full_transform_url))
-    asyncio.run(fire_and_forget_get(new_url_full_transform_url))
     file3=get_image_file(new_url_full_transform_url)
     return get_image_file_base64(file3)
